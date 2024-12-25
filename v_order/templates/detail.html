@@ -4,15 +4,28 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Output Page</title>
-    <style>
+   <style>
         body {
             margin: 0;
             display: flex;
+            flex-direction: column;
             justify-content: center;
             align-items: center;
-            height: 100vh;
+            min-height: 100vh;
             background: linear-gradient(135deg, #f3ec78, #af4261);
             font-family: Arial, sans-serif;
+        }
+
+        .container {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 20px;
+            padding: 20px;
+            width: 100%;
+            max-width: 1200px;
+            box-sizing: border-box;
+            margin-bottom: 20rem;
+            /* Adjust based on footer height */
         }
 
         .glass-card {
@@ -22,22 +35,39 @@
             backdrop-filter: blur(10px);
             box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
             border: 1px solid rgba(255, 255, 255, 0.3);
-            width: 350px;
             text-align: center;
+        }
+
+        footer {
+            padding: 20px;
+            background: rgba(0, 0, 0, 0.1);
+            width: 100%;
+            text-align: center;
+            position: fixed;
+            bottom:0;
+            left: 0;
+           position-top:100rem;
         }
     </style>
 </head>
+
 <body>
-    {% include "header.html" %}
-    {%for obj in data%}
-    <div class="glass-card" style="">
-        <h1>Driver Details</h1>
-        <p>Name: {{obj.name }}</p>
-        <p>Email: {{obj.email }}</p>
-        <p>phone: {{obj.phone }}</p>
-        <p>vehicle: {{obj.vehicle}}</p>
+    <div style="margin:2rem;">
+        {% include "header.html" %}
     </div>
-    {% endfor %}
-    {% include "footer.html" %}
+    <div class="container">
+        {% for obj in data %}
+        <div class="glass-card">
+            <h1>Driver Details:</h1>
+            <p>Name: {{ obj.name }}</p>
+            <p>Email: {{ obj.email }}</p>
+            <p>Phone: {{ obj.phone }}</p>
+            <p>Vehicle: {{ obj.vehicle }}</p>
+        </div>
+        {% endfor %}
+        <footer>
+            {% include "footer.html" %}
+        </footer>
 </body>
+
 </html>
